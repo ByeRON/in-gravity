@@ -16,7 +16,6 @@ func NewRestCreateUserPresenter(w http.ResponseWriter) applications.CreateUserPr
 }
 
 func (p RestCreateUserPresenter) Output() {
-	return
 }
 
 func (p RestCreateUserPresenter) OutputError(e error) {
