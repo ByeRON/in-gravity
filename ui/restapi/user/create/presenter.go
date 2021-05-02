@@ -1,7 +1,9 @@
 package create
 
 import (
+	"encoding/json"
 	"in-gravity/applications"
+	"in-gravity/ui/restapi/defs"
 	"net/http"
 )
 
@@ -18,5 +20,9 @@ func (p RestCreateUserPresenter) Output() {
 }
 
 func (p RestCreateUserPresenter) OutputError(e error) {
-	return
+	var statusCode int
+	statusCode, structResponse := defs.NewResponseError(e)
+	res, _ := json.Marshal(structResponse)
+	p.w.WriteHeader(statusCode)
+	p.w.Write(res)
 }
