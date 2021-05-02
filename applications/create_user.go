@@ -5,6 +5,10 @@ type CreateUserPresenterInterface interface {
 	OutputError(error)
 }
 
+type CreateUserInput struct {
+	Name string
+}
+
 type CreateUserOutput struct {
 	UserId string
 }
