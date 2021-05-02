@@ -9,6 +9,7 @@ import (
 
 type RequestCreateUserHandleOperator struct {
 	presenter applications.CreateUserPresenterInterface
+	service   applications.CreateUserApplicationServiceInterface
 	writer    http.ResponseWriter
 	request   *http.Request
 }
@@ -25,5 +26,14 @@ func (o *RequestCreateUserHandleOperator) SetupPresenter() error {
 	return nil
 }
 
+func (o *RequestCreateUserHandleOperator) SetupService() error {
+	// appconf
+
+	//TODO: use wire_gen
+	o.service = applications.NewCreateUserApplicationService(o.presenter)
+	return nil
+}
+
 func (o *RequestCreateUserHandleOperator) ExecuteService() {
+	o.service.Handle()
 }
