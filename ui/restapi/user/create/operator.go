@@ -41,7 +41,7 @@ func (o *RequestCreateUserHandleOperator) SetupService() error {
 func (o *RequestCreateUserHandleOperator) ParseInput() error {
 	//OK: Get request
 	//OK: Unmarshal request and transfer RequestCreateUser
-	//NG: transfer RequestCreateUser to input
+	//OK: transfer RequestCreateUser to input
 	//NG: API definition -> swaggo
 
 	body := o.request.Body
@@ -64,7 +64,6 @@ func (o *RequestCreateUserHandleOperator) ParseInput() error {
 	}
 
 	o.input = input
-
 	return nil
 }
 
