@@ -14,6 +14,14 @@ var uiErrorCodeErrorMap = map[UiErrorCode]error{
 	ErrorSomething: something,
 }
 
+func (e UiErrorCode) New() error {
+	if err, ok := uiErrorCodeErrorMap[e]; !ok {
+		return xerrors.New("Unexpected ErrorCode")
+	} else {
+		return err
+	}
+}
+
 func (e UiErrorCode) String() string {
 	return string(e)
 }
