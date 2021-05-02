@@ -9,7 +9,7 @@ type RequestHandleManager struct {
 }
 
 func (m RequestHandleManager) Handle() {
-	//SetupPresenter
+	m.Operator.SetupPresenter()
 	//ParseInput
 	//SetupService
 	m.Operator.ExecuteService()

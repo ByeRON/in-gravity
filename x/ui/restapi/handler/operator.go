@@ -1,7 +1,7 @@
 package handler
 
 type RequestHandleOperatorInterface interface {
-	//SetupPresenter() error
+	SetupPresenter() error
 	//ParseInput() error
 	//SetupService() error
 	ExecuteService()
