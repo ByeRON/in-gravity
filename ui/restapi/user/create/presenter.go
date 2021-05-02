@@ -15,7 +15,17 @@ func NewRestCreateUserPresenter(w http.ResponseWriter) applications.CreateUserPr
 	return RestCreateUserPresenter{w: w}
 }
 
+<<<<<<< HEAD
 func (p RestCreateUserPresenter) Output() {
+=======
+func (p RestCreateUserPresenter) Output(o applications.CreateUserOutput) {
+	p.w.WriteHeader(http.StatusAccepted)
+	data := ResponseCreateUser{
+		UserId: o.UserId,
+	}
+	body, _ := json.Marshal(data)
+	p.w.Write(body)
+>>>>>>> Add
 }
 
 func (p RestCreateUserPresenter) OutputError(e error) {

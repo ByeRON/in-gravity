@@ -1,6 +1,35 @@
 package applications
 
 type CreateUserPresenterInterface interface {
-	Output()
+	Output(CreateUserOutput)
 	OutputError(error)
+}
+
+type CreateUserOutput struct {
+	UserId string
+}
+
+type CreateUserApplicationServiceInterface interface {
+	//Handle(CreateUserInput)
+	Handle()
+}
+
+type CreateUserApplicationService struct {
+	presenter CreateUserPresenterInterface
+}
+
+func NewCreateUserApplicationService(
+	presenter CreateUserPresenterInterface,
+) CreateUserApplicationService {
+	return CreateUserApplicationService{
+		presenter: presenter,
+	}
+}
+
+func (s CreateUserApplicationService) Handle() {
+	s.presenter.Output(
+		CreateUserOutput{
+			UserId: "hogehoge",
+		},
+	)
 }
