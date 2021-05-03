@@ -2,6 +2,7 @@ package applications
 
 import (
 	"in-gravity/domains/entities"
+	"in-gravity/domains/repositories"
 	"in-gravity/domains/vo"
 )
 
@@ -23,14 +24,17 @@ type CreateUserApplicationServiceInterface interface {
 }
 
 type CreateUserApplicationService struct {
-	presenter CreateUserPresenterInterface
+	presenter      CreateUserPresenterInterface
+	userRepository repositories.UserRepositoryInterface
 }
 
 func NewCreateUserApplicationService(
 	presenter CreateUserPresenterInterface,
-) CreateUserApplicationService {
+	userRepository repositories.UserRepositoryInterface,
+) CreateUserApplicationServiceInterface {
 	return CreateUserApplicationService{
-		presenter: presenter,
+		presenter:      presenter,
+		userRepository: userRepository,
 	}
 }
 
@@ -46,7 +50,8 @@ func (s CreateUserApplicationService) Handle(input CreateUserInput) {
 		s.presenter.OutputError(err)
 	}
 
-	entities.NewUser(userId, userName)
+	User := entities.NewUser(userId, userName)
+	err = s.userRepository.Save(User)
 
 	s.presenter.Output(
 		CreateUserOutput{

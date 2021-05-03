@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"in-gravity/applications"
+	"in-gravity/registry"
 	"in-gravity/x/ui/restapi/handler"
 )
 
@@ -33,8 +34,13 @@ func (o *RequestCreateUserHandleOperator) SetupPresenter() error {
 func (o *RequestCreateUserHandleOperator) SetupService() error {
 	// appconf
 
-	//TODO: use wire_gen
-	o.service = applications.NewCreateUserApplicationService(o.presenter)
+	s, err := registry.ProvideCreateUserApplicationService(o.presenter)
+	if err != nil {
+		o.presenter.OutputError(err)
+		return err
+	}
+
+	o.service = s
 	return nil
 }
 
