@@ -14,8 +14,7 @@ type CreateUserOutput struct {
 }
 
 type CreateUserApplicationServiceInterface interface {
-	//Handle(CreateUserInput)
-	Handle()
+	Handle(CreateUserInput)
 }
 
 type CreateUserApplicationService struct {
@@ -30,7 +29,7 @@ func NewCreateUserApplicationService(
 	}
 }
 
-func (s CreateUserApplicationService) Handle() {
+func (s CreateUserApplicationService) Handle(input CreateUserInput) {
 	s.presenter.Output(
 		CreateUserOutput{
 			UserId: "hogehoge",
