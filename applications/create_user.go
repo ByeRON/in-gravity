@@ -1,5 +1,10 @@
 package applications
 
+import (
+	"in-gravity/domains/entities"
+	"in-gravity/domains/vo"
+)
+
 type CreateUserPresenterInterface interface {
 	Output(CreateUserOutput)
 	OutputError(error)
@@ -30,9 +35,22 @@ func NewCreateUserApplicationService(
 }
 
 func (s CreateUserApplicationService) Handle(input CreateUserInput) {
+
+	userId, err := vo.NewUserId()
+	if err != nil {
+		s.presenter.OutputError(err)
+	}
+
+	userName, err := vo.NewUserName(input.Name)
+	if err != nil {
+		s.presenter.OutputError(err)
+	}
+
+	entities.NewUser(userId, userName)
+
 	s.presenter.Output(
 		CreateUserOutput{
-			UserId: "hogehoge",
+			UserId: userId.String(),
 		},
 	)
 }
