@@ -43,15 +43,21 @@ func (s CreateUserApplicationService) Handle(input CreateUserInput) {
 	userId, err := vo.NewUserId()
 	if err != nil {
 		s.presenter.OutputError(err)
+		return
 	}
 
 	userName, err := vo.NewUserName(input.Name)
 	if err != nil {
 		s.presenter.OutputError(err)
+		return
 	}
 
 	User := entities.NewUser(userId, userName)
 	err = s.userRepository.Save(User)
+	if err != nil {
+		s.presenter.OutputError(err)
+		return
+	}
 
 	s.presenter.Output(
 		CreateUserOutput{
