@@ -7,6 +7,7 @@ require (
 	github.com/go-chi/chi/v5 v5.0.3
 	github.com/go-openapi/spec v0.20.3 // indirect
 	github.com/go-openapi/swag v0.19.15 // indirect
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/google/uuid v1.2.0
 	github.com/google/wire v0.5.0
 	github.com/mailru/easyjson v0.7.7 // indirect

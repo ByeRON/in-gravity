@@ -25,3 +25,7 @@ func NewUserName(name string) (UserName, error) {
 
 	return UserName(name), nil
 }
+
+func (n UserName) String() string {
+	return string(n)
+}
