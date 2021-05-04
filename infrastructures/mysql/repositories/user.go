@@ -2,7 +2,6 @@ package repositories
 
 import (
 	"database/sql"
-	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 
@@ -36,22 +35,9 @@ func (r MySQLRepository) Save(user entities.User) error {
 		return err
 	}
 
-	response, err := statement.Exec(user.Id.String(), user.Name.String())
+	_, err = statement.Exec(user.Id.String(), user.Name.String())
 	if err != nil {
 		return err
 	}
-
-	lastId, err := response.LastInsertId()
-	if err != nil {
-		return err
-	}
-
-	rowCount, err := response.RowsAffected()
-	if err != nil {
-		return err
-	}
-
-	fmt.Println(lastId, rowCount)
-
 	return nil
 }
